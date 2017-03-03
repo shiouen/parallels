@@ -8,6 +8,10 @@ import javax.swing.Icon;
 
 import static io.shiouen.parallels.properties.Properties.from;
 
+/**
+ * ConfigurationType for the ParallelsRunConfiguration.
+ * This information will be used in the run configurations menu.
+ */
 public class ParallelsConfigurationType extends ConfigurationTypeBase {
     private static final String properties = "/properties/run-config-type.properties";
 

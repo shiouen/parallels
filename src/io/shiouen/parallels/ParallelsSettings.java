@@ -6,10 +6,19 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class ParallelsSettings {
-    private Set<RunConfiguration> runConfigurations;
+    private final Set<RunConfiguration> runConfigurations;
 
     public ParallelsSettings() {
         this.runConfigurations = new LinkedHashSet<>();
+    }
+
+    public ParallelsSettings(Set<RunConfiguration> runConfigurations) {
+        this();
+        this.setRunConfigurations(runConfigurations);
+    }
+
+    public ParallelsSettings(ParallelsSettings settings) {
+        this(settings.getRunConfigurations());
     }
 
     public Set<RunConfiguration> getRunConfigurations() {
@@ -17,14 +26,11 @@ public class ParallelsSettings {
     }
 
     public void setRunConfigurations(Set<RunConfiguration> runConfigurations) {
-        this.runConfigurations = runConfigurations;
+        this.runConfigurations.clear();
+        this.runConfigurations.addAll(runConfigurations);
     }
 
     public boolean hasRunConfigurations() {
         return !this.runConfigurations.isEmpty();
-    }
-
-    public void addRunConfiguration(RunConfiguration runConfiguration) {
-        this.runConfigurations.add(runConfiguration);
     }
 }

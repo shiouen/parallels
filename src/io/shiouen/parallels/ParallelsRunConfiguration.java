@@ -11,6 +11,10 @@ import org.jetbrains.annotations.Nullable;
 
 import static io.shiouen.parallels.properties.Properties.from;
 
+/**
+ * Instance of a ParallelsConfigurationType RunConfiguration.
+ * Is used from the moment you add a configuration of that type.
+ */
 public class ParallelsRunConfiguration extends RunConfigurationBase {
     private static final String properties = "/properties/run-config.properties";
     private static final String name = "name";
@@ -19,7 +23,6 @@ public class ParallelsRunConfiguration extends RunConfigurationBase {
 
     public ParallelsRunConfiguration(Project project, @NotNull ParallelsConfigurationType type) {
         super(project, type.getConfigurationFactories()[0], from(properties).get(name));
-
         this.settings = new ParallelsSettings();
     }
 
@@ -28,13 +31,13 @@ public class ParallelsRunConfiguration extends RunConfigurationBase {
     }
 
     public void setSettings(ParallelsSettings settings) {
-        this.settings = settings;
+        this.settings = new ParallelsSettings(settings);
     }
 
     @NotNull
     @Override
     public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
-        return new ParallelsSettingsEditor(this.settings);
+        return new ParallelsSettingsEditor(this);
     }
 
     @Override

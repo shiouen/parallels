@@ -6,7 +6,9 @@ import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 
-
+/**
+ * Factory class responsible for creating ParallelsRunConfiguration instances.
+ */
 public class ParallelsConfigurationFactory extends ConfigurationFactory {
     private ParallelsConfigurationType parallelsConfigurationType;
 
