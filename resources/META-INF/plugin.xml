@@ -1,6 +1,6 @@
 <idea-plugin version="2">
     <id>com.your.company.unique.plugin.id</id>
-    <name>Plugin display name here</name>
+    <name>Parallels</name>
     <version>1.0</version>
     <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
 
@@ -20,17 +20,15 @@
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
          on how to target different products -->
-    <!-- uncomment to enable plugin in all products
+
     <depends>com.intellij.modules.lang</depends>
-    -->
 
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
-        <configurationType implementation="io.shiouen.parallels.ParallelsConfigurationType"/>
+        <configurationType implementation="io.shiouen.parallels.configuration.ParallelsConfigurationType"/>
     </extensions>
 
     <actions>
         <!-- Add your actions here -->
     </actions>
-
 </idea-plugin>

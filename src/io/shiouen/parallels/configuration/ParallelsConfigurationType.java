@@ -1,4 +1,4 @@
-package io.shiouen.parallels;
+package io.shiouen.parallels.configuration;
 
 import com.intellij.execution.configurations.ConfigurationTypeBase;
 import com.intellij.openapi.util.IconLoader;
@@ -13,7 +13,7 @@ import static io.shiouen.parallels.properties.Properties.from;
  * This information will be used in the run configurations menu.
  */
 public class ParallelsConfigurationType extends ConfigurationTypeBase {
-    private static final String properties = "/properties/run-config-type.properties";
+    private static final String properties = "/properties/configuration-type.properties";
 
     private static final String id = "id";
     private static final String name = "name";
@@ -25,11 +25,11 @@ public class ParallelsConfigurationType extends ConfigurationTypeBase {
              from(properties).get(name),
              from(properties).get(description),
              IconLoader.getIcon(from(properties).get(icon)));
-
-        addFactory(new ParallelsConfigurationFactory(this));
     }
 
     public ParallelsConfigurationType(@NotNull String id, String displayName, String description, Icon icon) {
         super(id, displayName, description, icon);
+
+        this.addFactory(new ParallelsConfigurationFactory(this));
     }
 }

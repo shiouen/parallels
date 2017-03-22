@@ -1,7 +1,8 @@
-package io.shiouen.parallels;
+package io.shiouen.parallels.settings;
 
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
+import io.shiouen.parallels.configuration.ParallelsRunConfiguration;
 import io.shiouen.parallels.ui.JParallelsSettingsPanel;
 import org.jetbrains.annotations.NotNull;
 
@@ -16,9 +17,9 @@ public class ParallelsSettingsEditor extends SettingsEditor<ParallelsRunConfigur
     private JParallelsSettingsPanel panel;
 
     public ParallelsSettingsEditor(ParallelsRunConfiguration runConfiguration) {
-        super();
-
         this.runConfiguration = runConfiguration;
+
+        this.panel = new JParallelsSettingsPanel(this.runConfiguration);
     }
 
     @Override
@@ -34,8 +35,6 @@ public class ParallelsSettingsEditor extends SettingsEditor<ParallelsRunConfigur
     @NotNull
     @Override
     protected JComponent createEditor() {
-        this.panel = new JParallelsSettingsPanel(this.runConfiguration);
-
         return this.panel;
     }
 }

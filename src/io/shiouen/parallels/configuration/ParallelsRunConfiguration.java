@@ -1,4 +1,4 @@
-package io.shiouen.parallels;
+package io.shiouen.parallels.configuration;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
@@ -6,6 +6,8 @@ import com.intellij.execution.configurations.*;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
+import io.shiouen.parallels.settings.ParallelsSettings;
+import io.shiouen.parallels.settings.ParallelsSettingsEditor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,13 +18,13 @@ import static io.shiouen.parallels.properties.Properties.from;
  * Is used from the moment you add a configuration of that type.
  */
 public class ParallelsRunConfiguration extends RunConfigurationBase {
-    private static final String properties = "/properties/run-config.properties";
+    private static final String properties = "/properties/run-configuration.properties";
     private static final String name = "name";
 
     private ParallelsSettings settings;
 
-    public ParallelsRunConfiguration(Project project, @NotNull ParallelsConfigurationType type) {
-        super(project, type.getConfigurationFactories()[0], from(properties).get(name));
+    public ParallelsRunConfiguration(Project project, @NotNull ParallelsConfigurationFactory factory) {
+        super(project, factory, from(properties).get(name));
         this.settings = new ParallelsSettings();
     }
 
@@ -31,7 +33,7 @@ public class ParallelsRunConfiguration extends RunConfigurationBase {
     }
 
     public void setSettings(ParallelsSettings settings) {
-        this.settings = new ParallelsSettings(settings);
+        this.settings = settings;
     }
 
     @NotNull
@@ -42,9 +44,11 @@ public class ParallelsRunConfiguration extends RunConfigurationBase {
 
     @Override
     public void checkConfiguration() throws RuntimeConfigurationException {
-        if (this.settings.hasRunConfigurations()) {
-            throw new RuntimeConfigurationError("No configurations selected.");
+        if (!this.settings.hasRunConfigurations()) {
+            throw new RuntimeConfigurationError("No run configurations selected.");
         }
+
+        // check here if recursive repetition of config
     }
 
     @Nullable

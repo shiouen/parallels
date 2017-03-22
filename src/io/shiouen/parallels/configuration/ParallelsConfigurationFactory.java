@@ -1,4 +1,4 @@
-package io.shiouen.parallels;
+package io.shiouen.parallels.configuration;
 
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationType;
@@ -10,17 +10,18 @@ import org.jetbrains.annotations.NotNull;
  * Factory class responsible for creating ParallelsRunConfiguration instances.
  */
 public class ParallelsConfigurationFactory extends ConfigurationFactory {
-    private ParallelsConfigurationType parallelsConfigurationType;
-
     public ParallelsConfigurationFactory(@NotNull ConfigurationType type) {
         super(type);
-
-        this.parallelsConfigurationType = (ParallelsConfigurationType) type;
     }
 
     @NotNull
     @Override
     public RunConfiguration createTemplateConfiguration(@NotNull Project project) {
-        return new ParallelsRunConfiguration(project, this.parallelsConfigurationType);
+        return new ParallelsRunConfiguration(project, this);
+    }
+
+    @Override
+    public boolean isConfigurationSingletonByDefault() {
+        return true;
     }
 }
